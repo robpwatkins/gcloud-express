@@ -15,6 +15,19 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 
+const createUnixSocketPool = async (config) => {
+  const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql'
+
+  return await mysql.createPool({
+    user: 'masterpup',
+    password: 'puppyAPI123$',
+    database: 'puppy_api_db',
+    socketPath: 'puppy-api-db:us-central1:puppy-api'
+  })
+}
+
+createUnixSocketPool();
+
 pool.getConnection(err => {
   if (err) throw err;
   console.log('Connected!');
