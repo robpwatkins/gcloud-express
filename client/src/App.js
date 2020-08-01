@@ -10,14 +10,11 @@ function App() {
         <p>
           Yooooooo <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={async () => {
+          const response = await fetch('/ping');
+          const body = await response.json();
+          console.log(body);
+          }}>click ME!</button>
       </header>
     </div>
   );

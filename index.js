@@ -1,12 +1,15 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 4000;
+const path = require('path');
 
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-    res.send('Welcome to our express app')
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('/ping', (req, res) => {
+    res.json('pong!')
 })
 
 app.listen(port, () => {
