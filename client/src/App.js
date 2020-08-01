@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Yooooooo <code>src/App.js</code> and save to reload.
+          Yooooo <code>src/App.js</code> and save to reload.
         </p>
         <button onClick={async () => {
           const response = await fetch('/pups');

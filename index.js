@@ -6,7 +6,7 @@ const mysql = require('mysql');
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: '104.154.50.119',
-  user: 'root',
+  user: 'masterpup',
   password: 'puppyAPI123$',
   database: 'puppy_api_db'
 });
