@@ -11,7 +11,7 @@ function App() {
           Yooooooo <code>src/App.js</code> and save to reload.
         </p>
         <button onClick={async () => {
-          const response = await fetch('/ping');
+          const response = await fetch('/pups');
           const body = await response.json();
           console.log(body);
           }}>click ME!</button>

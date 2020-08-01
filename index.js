@@ -1,17 +1,51 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
-const port = process.env.PORT || 4000;
+const express = require('express');
 const path = require('path');
-
-app.use(bodyParser.json())
+const app = express();
+const port = process.env.PORT || 5000;
+const mysql = require('mysql');
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  host: '104.154.50.119',
+  user: 'root',
+  password: 'puppyAPI123$',
+  database: 'puppy_api_db'
+});
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get('/ping', (req, res) => {
-    res.json('pong!')
+app.listen(port, () => console.log(`Listening on port ${port}...`));
+
+pool.getConnection(err => {
+  if (err) throw err;
+  console.log('Connected!');
+});
+
+app.use(express.json());
+
+app.get('/ping', (req, res) => res.json('pong!'));
+
+app.get('/pups', (req, res) => {
+  pool.query('SELECT * FROM pups', (err, rows) => {
+    if (err) throw err;
+    res.set({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin' : "*", 
+      'Access-Control-Allow-Credentials' : true
+    })
+    res.json(rows);
+  })
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
 })
 
-app.listen(port, () => {
-    console.log(`App running on port: ${port}`)
+app.post('/pups', (req, res) => {
+  const newPup = { 
+    name: req.body.name,
+    img_url: req.body.img_url
+   }
+  pool.query('INSERT INTO pups SET ?', newPup, (err, res) => {
+    if (err) throw err;
+  })
 })

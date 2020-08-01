@@ -1,2 +1,4 @@
 runtime: nodejs10
 env: standard
+beta_settings:
+    cloud_sql_instances: "puppy-api-db:us-central1:puppy-api"
