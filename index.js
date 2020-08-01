@@ -26,7 +26,7 @@ const createUnixSocketPool = async (config) => {
   })
 }
 
-createUnixSocketPool();
+// createUnixSocketPool();
 
 pool.getConnection(err => {
   if (err) throw err;
