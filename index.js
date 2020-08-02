@@ -5,26 +5,28 @@ const port = process.env.PORT || 5000;
 const mysql = require('mysql');
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: '104.154.50.119',
-  user: 'masterpup',
-  password: 'puppyAPI123$',
-  database: 'puppy_api_db'
+  host: 'us-cdbr-east-02.cleardb.com',
+  user: 'b4d90c8a948ffc',
+  password: '2dc553d4',
+  database: 'heroku_255650b15c9441b'
 });
+
+mysql://b4d90c8a948ffc:2dc553d4@us-cdbr-east-02.cleardb.com/heroku_255650b15c9441b?reconnect=true
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 
-const createUnixSocketPool = async (config) => {
-  const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql'
+// const createUnixSocketPool = async (config) => {
+//   const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql'
 
-  return await mysql.createPool({
-    user: 'masterpup',
-    password: 'puppyAPI123$',
-    database: 'puppy_api_db',
-    socketPath: 'puppy-api-db:us-central1:puppy-api'
-  })
-}
+//   return await mysql.createPool({
+//     user: 'masterpup',
+//     password: 'puppyAPI123$',
+//     database: 'puppy_api_db',
+//     socketPath: 'puppy-api-db:us-central1:puppy-api'
+//   })
+// }
 
 // createUnixSocketPool();
 
